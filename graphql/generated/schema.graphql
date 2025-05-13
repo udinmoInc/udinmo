@@ -1,0 +1,74 @@
+schema {
+  query: RootQueryType
+  mutation: RootMutationType
+}
+
+type RootQueryType {
+  """Fetch all available workspaces from the database"""
+  workspaces: [Workspace]
+}
+
+"""A workspace object containing user-managed project data"""
+type Workspace {
+  """Unique identifier for the workspace"""
+  id: ID!
+
+  """Timestamp of when the workspace was created"""
+  createdAt: String!
+
+  """Name or identifier of the workspace owner"""
+  workspaceOwner: String!
+
+  """Title or name of the workspace"""
+  title: String!
+
+  """Icon identifier used for UI display"""
+  iconId: String!
+
+  """Optional JSON string storing workspace metadata or configuration"""
+  data: String
+
+  """Indicates whether the workspace is marked as trash"""
+  inTrash: Boolean!
+
+  """Optional logo image URL associated with the workspace"""
+  logo: String
+
+  """Optional banner image URL for the workspace"""
+  bannerUrl: String
+
+  """UUID of the user who created or owns the workspace"""
+  ownerId: String!
+}
+
+type RootMutationType {
+  """Create a new workspace"""
+  CreateWorkspace(input: CreateWorkspaceInput!): Workspace!
+}
+
+"""Input type for creating a new workspace"""
+input CreateWorkspaceInput {
+  """Name or identifier of the workspace owner"""
+  workspaceOwner: String!
+
+  """UUID of the workspace owner (user who owns the workspace)"""
+  ownerId: String!
+
+  """Title or name of the workspace"""
+  title: String!
+
+  """Icon identifier for UI display"""
+  iconId: String!
+
+  """Optional JSON string storing workspace metadata or config"""
+  data: String
+
+  """Indicates whether the workspace is in the trash (default: false)"""
+  inTrash: Boolean
+
+  """Optional logo image URL for the workspace"""
+  logo: String
+
+  """Optional banner image URL for the workspace"""
+  bannerUrl: String
+}

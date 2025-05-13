@@ -1,0 +1,12 @@
+overwrite: true
+schema:  './graphql/generated/schema.graphql'
+documents: null
+generates:
+  ./graphql/generated/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+config: 
+contextType: ./graphql/prisma/IPrismaContext#IPrismaContext
+useIndexSignature: trues
